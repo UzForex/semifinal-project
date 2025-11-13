@@ -1,0 +1,29 @@
+{
+  "name": "semifinal-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type":"commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Otabekova/semifinal-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Otabekova/semifinal-project/issues"
+  },
+  "homepage": "https://github.com/Otabekova/semifinal-project#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
