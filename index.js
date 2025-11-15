@@ -66,6 +66,82 @@ Quyidagi menyudan kerakli bo‘limni tanlang 👇
         },
       }
     );
+
+bot.on("callback_query", (query) => {
+  const chatId = query.message.chat.id;
+  const data = query.data;
+
+  if (data === "course_english") {
+    bot.sendMessage(
+      chatId,
+      `
+🇺🇸 *Ingliz tili kursi*  
+— Boshlang'ich, o‘rta va yuqori darajalar  
+— Haftasiga: 3 ta dars  
+— Dars davomiyligi: 1.5 soat  
+— Oylik narx: *350 000 so‘m*
+
+📆 Darslar jadvali:  
+• Du — Cho — Pa  
+• Sa — Ya
+
+📲 Ro‘yxatdan o‘tish uchun: "✍️ Ro‘yxatdan o‘tish"
+      `,
+      { parse_mode: "Markdown" }
+    );
+  }
+
+  else if (data === "course_rus") {
+    bot.sendMessage(
+      chatId,
+      `
+🇷🇺 *Rus tili kursi*  
+— Grammatika + suhbat  
+— Haftasiga: 3 ta dars  
+— Dars davomiyligi: 1.5 soat  
+— Oylik narx: *350 000 so‘m*
+
+📆 Jadval:  
+• Du — Cho — Pa  
+• Sa — Ya
+      `,
+      { parse_mode: "Markdown" }
+    );
+  }
+
+  else if (data === "course_turk") {
+    bot.sendMessage(
+      chatId,
+      `
+🇹🇷 *Turk tili kursi*  
+— Ichida grammatika va amaliy mashg'ulotlar  
+— Haftasiga 3 ta dars  
+— 1.5 soatdan  
+— Oylik narx: *350 000 so‘m*
+
+📆 Jadval:  
+• Du — Cho — Pa  
+      `,
+      { parse_mode: "Markdown" }
+    );
+  }
+
+  else if (data === "course_dasturlash") {
+    bot.sendMessage(
+      chatId,
+      `*💻 Dasturlash (Python, Web)*
+      -Ichida Python, Web
+      -Haftasiga 3 ta dars
+      -2 soatdan
+      -Oylik narx: *500 000*
+      
+📆 Jadval:  
+• Du — Cho — Pa 
+    `,
+     { parse_mode: "Markdown" }
+    );
+  }
+});
   } else if (text == "ℹ️ Markaz haqida") {
     bot.sendMessage(chatId, "📍 Bizning o‘quv markaz joylashuvi:");
     bot.sendLocation(chatId, 41.3867491, 60.3624115);
