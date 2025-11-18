@@ -1,14 +1,17 @@
 const TelegramBot = require("node-telegram-bot-api")
 
-const TOKEN = "8443492861:AAGRAPm9K4nZSXVpgx_R4fK09la0AFswnMQ"
+const { config } = require("dotenv");
+config();
+
+const TOKEN = process.env.BOT_TOKEN;
 
 
 const bot = new TelegramBot(TOKEN,{polling:true});
-
+let usersData = [];
 
 
 bot.on("message", (msg) =>{
-    console.log(msg);
+    //console.log(msg);
     
     const chatId = msg.chat.id;
     const text = msg.text;
@@ -141,11 +144,46 @@ bot.on("callback_query", (query) => {
      { parse_mode: "Markdown" }
     );
   }
+
+
+  else if (data === "course_dizayn")  {
+    bot.sendMessage(
+      chatId,
+      `*🎨 Grafik dizayn*
+      -Haftasiga 3ta dars 
+      -2 soatdan
+      -Oylik narx: *400 000*
+      📆 Jadval:  
+• Du — Cho — Pa 
+    `,
+    { parse_mode: "Markdown"}
+    ); 
+  }
 });
   } else if (text == "ℹ️ Markaz haqida") {
     bot.sendMessage(chatId, "📍 Bizning o‘quv markaz joylashuvi:");
     bot.sendLocation(chatId, 41.3867491, 60.3624115);
-  } else {
+  } else if (text == "✍️ Ro‘yxatdan o‘tish") {
+    const userExists = usersData.some((user) => user.chatId === chatId);
+
+    console.log("bormi: ", userExists);
+
+    if (!userExists) {
+      usersData = [
+        ...usersData,
+        {
+          chatId: chatId,
+          firstName: firstName,
+          admin: false,
+        },
+      ];
+      bot.sendMessage(chatId, `Tabriklaymiz, siz ro'yhatdan o'tdingiz! ✅`);
+    } else {
+      bot.sendMessage(chatId, `Siz allaqachon ro'yhatdan o'tdingiz ❗️`);
+    }
+
+    console.log(usersData);
+    }else {
     bot.sendMessage(
       chatId,
       `
@@ -168,4 +206,3 @@ Iltimos, quyidagi tugmani bosing 👇
 console.log("Bot ishga tushdi...");
 
   
-console.log("Bot ishga tushdi");
