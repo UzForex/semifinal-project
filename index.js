@@ -1,13 +1,14 @@
-const TelegramBot = require("node-telegram-bot-api")
-
-const { config } = require("dotenv");
-config();
+import TelegramBot from "node-telegram-bot-api";
+import { config } from "dotenv";
+import { onStart } from "./src/onStart.js";
+import { onCourses } from "./src/onCourses.js";
+import { onRegister } from "./src/onRegister.js";
 
 const TOKEN = process.env.BOT_TOKEN;
 
 
-const bot = new TelegramBot(TOKEN,{polling:true});
-let usersData = [];
+const bot = new TelegramBot(TOKEN, {polling:true});
+
 
 
 bot.on("message", (msg) =>{
@@ -19,31 +20,7 @@ bot.on("message", (msg) =>{
 
 
     if(text == "/start" || text == "Asosiy menyuga qaytish") {
-        bot.sendMessage(
-            chatId,
-            `👋 Assalomu alaykum, ${firstName}!
-            
- 📚 100x o‘quv markazining rasmiy botiga xush kelibsiz!
-
-Bu bot orqali siz:
-• Kurslarimiz haqida batafsil ma’lumot olasiz  
-• Kurslarga onlayn ro‘yxatdan o‘tishingiz mumkin  
-• Jadval va to‘lovlar haqida ma’lumot olasiz  
-
-Quyidagi menyudan kerakli bo‘limni tanlang 👇
-
-    `,
-    {
-        reply_markup: {
-          keyboard: [
-            [{ text: "📚 Kurslar" }, { text: "✍️ Ro‘yxatdan o‘tish" }],
-            [{ text: "ℹ️ Markaz haqida" }, { text: "💬 Fikr bildirish" }],
-            [{ text: "❓ Yordam" }],
-          ],
-          resize_keyboard: true,
-        },
-      }
-    );
+        onStart(chatId,firstName)
   } else if (text == "📚 Kurslar") {
     bot.sendMessage(
       chatId,
@@ -183,7 +160,19 @@ bot.on("callback_query", (query) => {
     }
 
     console.log(usersData);
-    }else {
+   }
+    else if (text === "💬 Fikr bildirish") {
+   
+
+    bot.sendMessage(chatId, "Fikringizni yozib yuboring:");
+  }
+      else   if (text === "❓ Yordam") {
+    bot.sendMessage(chatId, "Yordam bo‘limi:\n- Ro‘yxatdan o‘tish\n- Fikr bildirish\n- Savollar uchun murojaat qiling");
+  }
+
+
+
+    else {
     bot.sendMessage(
       chatId,
       `
@@ -206,3 +195,4 @@ Iltimos, quyidagi tugmani bosing 👇
 console.log("Bot ishga tushdi...");
 
   
+export{ bot };
