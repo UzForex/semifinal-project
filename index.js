@@ -7,6 +7,10 @@ import { onRegister } from "./src/onRegister.js";
 const TOKEN = process.env.BOT_TOKEN;
 
 
+
+
+
+
 const bot = new TelegramBot(TOKEN, {polling:true});
 
 
